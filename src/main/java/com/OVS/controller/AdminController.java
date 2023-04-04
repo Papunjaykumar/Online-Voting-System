@@ -1,6 +1,7 @@
 package com.OVS.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.OVS.model.Candidate;
 import com.OVS.model.User;
 import com.OVS.service.UserService;
 
@@ -69,6 +71,29 @@ public class AdminController {
 	  @GetMapping("/authorizeUser/{flag}")
 	  public List<User> getAllAuthorizeOrUnauthorizeUser(@PathVariable boolean flag){
 		  return userserv.getAllUnAuthorizeUser(flag);
+	  }
+	  
+	  //adding the candidate 
+	  @PostMapping("/canidate")
+	  public Candidate addCandidate(@RequestBody Candidate candidate) {
+		  
+		  
+		  this.userserv.addCandidate(candidate);
+		return candidate;
+		  
+	  }
+	  @DeleteMapping("/delCandidate/{id}")
+	  public Candidate delCandidateById(@PathVariable Long id) {
+		  Optional<Candidate> candidate=userserv.getCandidateById(id);
+		  System.out.println(candidate);
+		  
+		  if(candidate.isPresent()) {
+			  userserv.deleteCandidate(id);
+			  
+		  }else {
+			  System.out.println("Candidate with following id is not present");
+		  }
+		  return candidate.get();
 	  }
 
 }
