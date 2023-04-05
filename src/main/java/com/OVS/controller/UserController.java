@@ -22,10 +22,12 @@ public class UserController {
 	
 	 
 	
+	
 	/*
 	 * @GetMapping("/changePassword") public String changePassword() {
 	 * 
 	 * return "change_password"; }
 	 */
+	 
 
 }

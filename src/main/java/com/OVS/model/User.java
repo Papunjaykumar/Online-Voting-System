@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,11 +18,13 @@ public class User {
 	@Column(nullable = false)
 	private String password;
 	@Column(unique=true,nullable = false)
+
 	private String email;
 	@Column(nullable = false)
 	private String firstName;
 	private String lastName;
 	private boolean isAdmin;
+	
 
 	private boolean isAuthorize;
 	public User() {

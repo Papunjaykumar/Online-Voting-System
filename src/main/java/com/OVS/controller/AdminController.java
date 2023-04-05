@@ -95,5 +95,11 @@ public class AdminController {
 		  }
 		  return candidate.get();
 	  }
+	  @GetMapping("getCandidate/{id}")
+	  public Candidate getCandidateById(@PathVariable Long id) {
+		 // System.out.println("Retrieving the detail of candidate with id :"+id);
+		 Optional<Candidate> candi=userserv.getCandidateById(id);
+		return candi.get();
+	  }
 
 }
