@@ -1,5 +1,6 @@
 package com.OVS.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -25,21 +26,22 @@ public class Election {
 	private List<ElectionCandidate>candidates;
 	@OneToMany(mappedBy = "election")
 	private List<Voter>voters;
+	private LocalDate startTime;
+	private LocalDate endTime;
 	public Election() {
 		super();  
 	}
-	
-	public Election(Long id, String name, String description, List<ElectionCandidate> candidates, List<Voter> voters) {
+	public Election(Long id, String name, String description, List<ElectionCandidate> candidates, List<Voter> voters,
+			LocalDate startTime, LocalDate endTime) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.candidates = candidates;
 		this.voters = voters;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
-
-
-
 	public Long getId() {
 		return id;
 	}
@@ -70,8 +72,16 @@ public class Election {
 	public void setVoters(List<Voter> voters) {
 		this.voters = voters;
 	}
-	
-	
-	
-
+	public LocalDate getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(LocalDate startTime) {
+		this.startTime = startTime;
+	}
+	public LocalDate getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(LocalDate endTime) {
+		this.endTime = endTime;
+	}	
 }

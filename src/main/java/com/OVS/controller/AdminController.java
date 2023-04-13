@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.OVS.model.Candidate;
 import com.OVS.model.User;
 import com.OVS.model.Voter;
+import com.OVS.service.CandidateService;
 import com.OVS.service.UserService;
 import com.OVS.service.VoterService;
 
@@ -27,6 +28,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userserv;
+	
+	@Autowired
+	private CandidateService candiserv;
 	
 	@Autowired
 	private VoterService voterServ;
@@ -83,17 +87,17 @@ public class AdminController {
 	  public Candidate addCandidate(@RequestBody Candidate candidate) {
 		  
 		  
-		  this.userserv.addCandidate(candidate);
+		  this.candiserv.addCandidate(candidate);
 		return candidate;
 		  
 	  }
 	  @DeleteMapping("/delCandidate/{id}")
 	  public Candidate delCandidateById(@PathVariable Long id) {
-		  Optional<Candidate> candidate=userserv.getCandidateById(id);
+		  Optional<Candidate> candidate=candiserv.getCandidateById(id);
 		  System.out.println(candidate);
 		  
 		  if(candidate.isPresent()) {
-			  userserv.deleteCandidate(id);
+			  candiserv.deleteCandidate(id);
 			  
 		  }else {
 			  System.out.println("Candidate with following id is not present");
@@ -109,7 +113,7 @@ public class AdminController {
 			 * return Optional.of(userserv.getCandidateById(id) .orElseThrow(() -> new
 			 * EntityNotFoundException("No entry was found for" + " id: " + id)));
 			 */
-		  Candidate candi=userserv.getCandidateById(id).orElse(null);
+		  Candidate candi=candiserv.getCandidateById(id).orElse(null);
 		  if(candi==null) {
 			  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO candidate with given id: "+id+" is present") ;
 		  }

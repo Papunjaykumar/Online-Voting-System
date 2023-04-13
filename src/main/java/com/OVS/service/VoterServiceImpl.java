@@ -27,4 +27,27 @@ public class VoterServiceImpl implements VoterService{
 		return this.voterRepo.findByUser_Email(email);
 	}
 
+	@Override
+	public void deleteVoterById(Long id) {
+		
+		Voter voter=this.voterRepo.findById(id).orElse(null);
+		if(voter==null) {
+			System.out.println("Voter has not been added");
+		}else {
+			this.voterRepo.delete(voter);
+			System.out.println("Voter deleted successfully");
+		}
+	}
+
+	@Override
+	public Voter findVoterById(Long id) {
+		Voter voter=this.voterRepo.findById(id).orElse(null);
+		if(voter==null) {
+			System.out.println("Voter not founded");
+			return voter;
+		}
+		System.out.println("Voter founded");
+		return voter;
+	}
+
 }

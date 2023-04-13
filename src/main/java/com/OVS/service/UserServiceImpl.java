@@ -16,8 +16,7 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private UserRepository userRepo;
-	@Autowired
-	private CandidateRepository candirepo;
+	
 
 	@Override
 	public List<User> getAllUser() {
@@ -61,28 +60,7 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userRepo.findByisAuthorize(flag);
 	}
-	//Adding the candidate this is done only by the admin
-	@Override
-	public void addCandidate(Candidate candi) {
-		// TODO Auto-generated method stub
-		candirepo.save(candi);
-		
-	}
-
-	@Override
-	public void deleteCandidate(Long id) {
-		// TODO Auto-generated method stub
-		System.out.println("Candidate with id :"+id+" is abbout to delete");
-		candirepo.deleteById(id);
-		System.out.println("Candidate deleted successfully");
-	}
 	
-	@Override
-	public Optional<Candidate> getCandidateById(Long id) {
-		// TODO Auto-generated method stub
-		return candirepo.findById(id);
-	}
-
 	@Override
 	public User getUserByEmail(String email) {
 		
