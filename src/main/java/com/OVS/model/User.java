@@ -1,4 +1,7 @@
 package com.OVS.model;
+import java.io.Serializable;
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="usertable")
-public class User {
+public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -17,28 +20,29 @@ public class User {
 	private String username;
 	@Column(nullable = false)
 	private String password;
+	
 	@Column(unique=true,nullable = false)
-
 	private String email;
 	@Column(nullable = false)
 	private String firstName;
 	private String lastName;
+	private LocalDate dateOfBirth;
 	private boolean isAdmin;
-	
-
 	private boolean isAuthorize;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(String username, String password, String email, String firstName, String lastName, boolean isAdmin,
-			boolean isAuthorize) {
+	public User(Long id, String username, String password, String email, String firstName, String lastName,
+			String dateOfBirth, boolean isAdmin, boolean isAuthorize) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.dateOfBirth =  LocalDate.parse(dateOfBirth);
 		this.isAdmin = isAdmin;
 		this.isAuthorize = isAuthorize;
 	}
@@ -78,6 +82,12 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public LocalDate getDateOfBirth() {
+		return dateOfBirth;
+	}
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = LocalDate.parse(dateOfBirth);;
+	}
 	public boolean isAdmin() {
 		return isAdmin;
 	}
@@ -91,9 +101,4 @@ public class User {
 		this.isAuthorize = isAuthorize;
 	}
 	
-	
-	
-	
-	
-
 }

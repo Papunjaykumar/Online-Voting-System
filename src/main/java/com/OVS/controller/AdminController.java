@@ -2,8 +2,8 @@ package com.OVS.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.OVS.model.Candidate;
 import com.OVS.model.User;
+import com.OVS.model.Voter;
 import com.OVS.service.UserService;
+import com.OVS.service.VoterService;
 
 @RestController
 @RequestMapping("/admin")
@@ -25,6 +27,9 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userserv;
+	
+	@Autowired
+	private VoterService voterServ;
 	
 	//Getting the profile of the user
 	@GetMapping("/profile/{id}")
@@ -74,7 +79,7 @@ public class AdminController {
 	  }
 	  
 	  //adding the candidate 
-	  @PostMapping("/canidate")
+	  @PostMapping("/addCanidate")
 	  public Candidate addCandidate(@RequestBody Candidate candidate) {
 		  
 		  
@@ -96,10 +101,43 @@ public class AdminController {
 		  return candidate.get();
 	  }
 	  @GetMapping("getCandidate/{id}")
-	  public Candidate getCandidateById(@PathVariable Long id) {
+	  public ResponseEntity<Object> getCandidateById(@PathVariable Long id) {
 		 // System.out.println("Retrieving the detail of candidate with id :"+id);
-		 Optional<Candidate> candi=userserv.getCandidateById(id);
-		return candi.get();
-	  }
+		 //Optional<Candidate> candi=userserv.getCandidateById(id);
+		//return candi.get();
+			/*
+			 * return Optional.of(userserv.getCandidateById(id) .orElseThrow(() -> new
+			 * EntityNotFoundException("No entry was found for" + " id: " + id)));
+			 */
+		  Candidate candi=userserv.getCandidateById(id).orElse(null);
+		  if(candi==null) {
+			  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("NO candidate with given id: "+id+" is present") ;
+		  }
+		  
+		  	return ResponseEntity.ok().body(candi);
+		  
+		  }
+		  
+		
+	  
+	  
+	  //Adding the user who is eligibe to vote in voter table;
+	 @PostMapping("/addVoter")
+	  public ResponseEntity<Object> addVoter(@RequestBody Voter voter) {
+		 
+		 String email= voter.getUser().getEmail();
+		 
+		 Voter tmp = this.voterServ.getByEmail(email);
+		 if(tmp!=null) {
+			 return ResponseEntity.status(HttpStatus.CONFLICT).body("Voter already exists");
+		 }
+		 
+		 User user=this.userserv.getUserByEmail(email);
+		 voter.setUser(user);
+		 voter =  this.voterServ.addVoter(voter);
+		return  ResponseEntity.ok().body(voter);
+	  
+	 }
+	  
 
 }

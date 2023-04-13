@@ -16,6 +16,7 @@ public interface UserService {
 	public void addCandidate(Candidate candi);
 	public void deleteCandidate(Long id);
 	public Optional<Candidate> getCandidateById(Long id);
+	public User getUserByEmail(String email);
 	
 	
 

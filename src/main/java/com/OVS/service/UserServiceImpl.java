@@ -80,7 +80,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Optional<Candidate> getCandidateById(Long id) {
 		// TODO Auto-generated method stub
-		return Optional.ofNullable(candirepo.findById(id).get());
+		return candirepo.findById(id);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		
+		return this.userRepo.findByEmail(email);
 	}
 	
 

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.OVS.model.Candidate;
+import com.OVS.model.Voter;
 import com.OVS.repo.CandidateRepository;
 
 @Service
@@ -30,13 +31,17 @@ public class VotingServiceImpl implements VotingService {
 		Optional<Candidate> candi=candirepo.findById(id);
 		if(candi.isPresent()) {
 			Candidate candi1=candi.get();
-			candi1.setVoteCount(candi1.getVoteCount()+1);
+			//candi1.setVoteCount(candi1.getVoteCount()+1);
 			candirepo.save(candi1);
 		}else {
 			System.out.println("Candidate with id "+id+" is not present");
 		}
 		
 	}
+
+
+
+	
 
 	
 
