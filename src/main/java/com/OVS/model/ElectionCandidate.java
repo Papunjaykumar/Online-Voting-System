@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 
@@ -14,10 +15,10 @@ public class ElectionCandidate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="election_id",nullable=false)
 	private Election election;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="candidate_id",nullable=false)
 	private Candidate candidate;
 	private int voteCount;
@@ -25,9 +26,9 @@ public class ElectionCandidate {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ElectionCandidate(Long id, Election election, Candidate candidate, int voteCount) {
+	public ElectionCandidate( Election election, Candidate candidate, int voteCount) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.election = election;
 		this.candidate = candidate;
 		this.voteCount = voteCount;

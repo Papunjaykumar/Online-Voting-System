@@ -8,4 +8,5 @@ import com.OVS.model.Voter;
 @Repository
 public interface VoterRepository extends JpaRepository<Voter, Long> {
 	Voter findByUser_Email(String email);
+	
 }

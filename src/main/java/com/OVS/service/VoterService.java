@@ -12,4 +12,5 @@ public interface VoterService {
 	void deleteVoterById(Long id);
 	Voter findVoterById(Long id);
 
+
 }

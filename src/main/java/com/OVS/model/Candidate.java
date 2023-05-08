@@ -2,7 +2,9 @@ package com.OVS.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,29 +18,46 @@ public class Candidate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(unique=true,nullable = false)
+	private String email;
+	@Column(nullable=false)
 	private String name;
+	@Column(nullable=false)
 	private String party;
 	private String imageurl;
-	@OneToMany(mappedBy = "candidate")
+	@OneToMany(mappedBy = "candidate" , fetch = FetchType.EAGER)
 	private List<ElectionCandidate>electionCandidate;
 	public Candidate() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Candidate(Long id, String name, String party, String imageurl, List<ElectionCandidate> electionCandidate) {
+	
+	public Candidate(Long id, String email, String name, String party, String imageurl,
+			List<ElectionCandidate> electionCandidate) {
 		super();
 		this.id = id;
+		this.email = email;
 		this.name = name;
 		this.party = party;
 		this.imageurl = imageurl;
 		this.electionCandidate = electionCandidate;
 	}
+
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getName() {
 		return name;
 	}

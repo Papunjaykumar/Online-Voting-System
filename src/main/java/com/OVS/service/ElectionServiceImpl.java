@@ -2,6 +2,7 @@ package com.OVS.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.OVS.model.Election;
@@ -10,6 +11,7 @@ import com.OVS.repo.ElectionRepository;
 @Service
 public class ElectionServiceImpl implements ElectionService{
 	
+	@Autowired
 	private ElectionRepository electRepo;
 
 	@Override
@@ -26,15 +28,14 @@ public class ElectionServiceImpl implements ElectionService{
 	}
 
 	@Override
-	public void addElection(Election election) {
+	public Election addElection(Election election) {
 		
 		Election tmp=this.electRepo.findById(election.getId()).orElse(null);
-		if(tmp==null) {
-			this.electRepo.save(election);
-		}else {
-			System.out.println("Data with the id : "+election.getId()+" is already present");
-		}
 		
+		if(tmp==null) {
+			tmp=this.electRepo.save(election);			
+		}		
+		return tmp;
 	}
 
 	@Override
@@ -57,6 +58,12 @@ public class ElectionServiceImpl implements ElectionService{
 			this.electRepo.save(election);
 		}
 		
+	}
+
+	@Override
+	public Election getElectionByName(String name) {
+		// TODO Auto-generated method stub
+		return this.electRepo.findByName(name);
 	}
 
 }

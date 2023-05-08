@@ -7,5 +7,5 @@ import com.OVS.model.Election;
 
 @Repository
 public interface ElectionRepository extends JpaRepository<Election, Long> {
-
+	Election findByName(String name);
 }

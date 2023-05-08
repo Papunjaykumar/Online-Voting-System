@@ -43,6 +43,7 @@ public class User implements Serializable {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth =  LocalDate.parse(dateOfBirth);
+		System.out.println(isAdmin+" "+isAuthorize);
 		this.isAdmin = isAdmin;
 		this.isAuthorize = isAuthorize;
 	}
@@ -92,6 +93,7 @@ public class User implements Serializable {
 		return isAdmin;
 	}
 	public void setAdmin(boolean isAdmin) {
+		System.out.println(isAdmin);
 		this.isAdmin = isAdmin;
 	}
 	public boolean isAuthorize() {
@@ -100,5 +102,12 @@ public class User implements Serializable {
 	public void setAuthorize(boolean isAuthorize) {
 		this.isAuthorize = isAuthorize;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", isAdmin="
+				+ isAdmin + ", isAuthorize=" + isAuthorize + "]";
+	}
+	
 	
 }

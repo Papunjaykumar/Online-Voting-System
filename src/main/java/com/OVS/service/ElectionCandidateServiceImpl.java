@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.OVS.model.Candidate;
+import com.OVS.model.Election;
 import com.OVS.model.ElectionCandidate;
 import com.OVS.repo.ElectionCandidateRepository;
 
@@ -62,6 +64,20 @@ public class ElectionCandidateServiceImpl implements ElectionCandidateService {
 			this.electRepo.delete(temp);
 		}
 		
+	}
+
+	@Override
+	public void addAllElectionCandidate(List<ElectionCandidate> candidates) {
+		// TODO Auto-generated method stub
+		
+		this.electRepo.saveAll(candidates);
+		
+	}
+
+	@Override
+	public ElectionCandidate getElectionCandidateByElectionAndCandidate(Election election, Candidate candidate) {
+		// TODO Auto-generated method stub
+		return this.electRepo.findByElectionAndCandidate(election, candidate);
 	}
 
 }

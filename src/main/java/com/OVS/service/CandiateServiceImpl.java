@@ -16,10 +16,10 @@ public class CandiateServiceImpl implements CandidateService{
 
 	
 		@Override
-		public void addCandidate(Candidate candi) {
+		public Candidate addCandidate(Candidate candi) {
 			
-			candirepo.save(candi);
-			
+			Candidate candiobj=candirepo.save(candi);
+			return candiobj;
 		}
 
 		@Override
@@ -34,6 +34,12 @@ public class CandiateServiceImpl implements CandidateService{
 		public Optional<Candidate> getCandidateById(Long id) {
 			
 			return candirepo.findById(id);
+		}
+
+		@Override
+		public Candidate getCandidateByEmail(String email) {
+			
+			return this.candirepo.findByEmail(email);
 		}
 
 		

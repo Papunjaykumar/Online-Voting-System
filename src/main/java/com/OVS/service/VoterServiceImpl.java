@@ -16,7 +16,10 @@ public class VoterServiceImpl implements VoterService{
 	public Voter addVoter(Voter voter) {
 		// TODO Auto-generated method stub
 		System.out.println("Voter is getting added to the database please wait.....");
+		System.out.println(voter.toString());
+		System.out.println("===============================================");
 		Voter voterobj=this.voterRepo.save(voter);
+		System.out.println(voterobj.toString());
 		return voterobj;
 		
 	}
@@ -49,5 +52,7 @@ public class VoterServiceImpl implements VoterService{
 		System.out.println("Voter founded");
 		return voter;
 	}
+
+	
 
 }

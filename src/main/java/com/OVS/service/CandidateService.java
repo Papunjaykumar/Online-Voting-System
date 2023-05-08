@@ -7,9 +7,10 @@ import com.OVS.model.User;
 
 public interface CandidateService {
 	
-	public void addCandidate(Candidate candi);
+	public Candidate addCandidate(Candidate candi);
 	public void deleteCandidate(Long id);
 	public Optional<Candidate> getCandidateById(Long id);
+	public Candidate getCandidateByEmail(String email);
 	
 
 }
