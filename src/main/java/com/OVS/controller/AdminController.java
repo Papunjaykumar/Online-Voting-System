@@ -140,11 +140,17 @@ public class AdminController {
 	  }	
 	  @PostMapping("/addVoter")
 	  public ResponseEntity<Object> addVoter(@RequestBody User user) {
-		  if(Period.between(user.getDateOfBirth(),LocalDate.now()).getYears()<18) {
+		  User tmpuser=this.userserv.getUserByEmail(user.getEmail());
+		  Voter tmp=this.voterServ.getByEmail(user.getEmail());
+		  System.out.println(tmp);
+		  if(tmp!=null) {
+			  return ResponseEntity.status(HttpStatus.CONFLICT).body("User has already been considered as a voter");
+		  }
+		  if(Period.between(tmpuser.getDateOfBirth(),LocalDate.now()).getYears()<18) {
 			  return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Age should be greater than 18");
 		  }
 		  Voter voter=new Voter();
-		  voter.setUser(user);
+		  voter.setUser(tmpuser);
 		 voter= this.voterServ.addVoter(voter);
 		  return ResponseEntity.ok(voter);
 	  }
@@ -177,8 +183,10 @@ public class AdminController {
 	  public ResponseEntity<Object> addVoter(@RequestBody List<Voter> voters,@PathVariable String id){
 		  Long electionId=Long.parseLong(id);
 		  Election election=this.electServ.getElectionByid(electionId);
+		  System.out.println(election);
 		  List<Vote> votes=new ArrayList<Vote>();
 		  List<Voter>alreadyExist=new ArrayList<Voter>();
+		  
 		  for(Voter voter: voters) {
 			  if(voteserv.getByVoterAndElection(voter, election)==null) {
 				  votes.add(new Vote(false,voter,election));

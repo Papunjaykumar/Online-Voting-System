@@ -57,6 +57,13 @@ public class ElectionCandidate {
 	public void setVoteCount(int voteCount) {
 		this.voteCount = voteCount;
 	}
+	@Override
+	public String toString() {
+		return "ElectionCandidate [id=" + id + ", voteCount="
+				+ voteCount + "]";
+	}
+	
+	
 	
 	
 

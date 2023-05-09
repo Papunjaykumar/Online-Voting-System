@@ -28,6 +28,7 @@ public class ElectionCandidateServiceImpl implements ElectionCandidateService {
 		
 		
 	}
+	
 
 	@Override
 	public ElectionCandidate getElectionCandidateById(Long id) {

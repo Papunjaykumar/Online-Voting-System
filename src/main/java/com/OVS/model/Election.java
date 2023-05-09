@@ -1,7 +1,7 @@
 package com.OVS.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,13 +10,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Election")
@@ -28,27 +28,27 @@ public class Election implements Serializable{
 	@Column(unique=true,nullable = false)
 	private String name;
 	private String description;
-	@OneToMany(mappedBy = "election" )
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
+	@OneToMany(mappedBy = "election",fetch = FetchType.LAZY )
 	private List<ElectionCandidate>candidates;
-	@OneToMany(mappedBy = "election")
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@JsonIgnore
+	@OneToMany(mappedBy = "election", fetch = FetchType.LAZY)
 	private List<Vote>votes;
-	private LocalDate startTime;
-	private LocalDate endTime;
+	private Timestamp startTime;
+	private Timestamp endTime;
 	public Election() {
 		super();  
 	}
 	public Election(Long id, String name, String description, List<ElectionCandidate> candidates, List<Vote> votes,
-			LocalDate startTime, LocalDate endTime) {
+			String startTime, String endTime) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.candidates = candidates;
 		this.votes = votes;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		this.startTime = Timestamp.valueOf(startTime);
+		this.endTime = Timestamp.valueOf(endTime);
 	}
 	public Long getId() {
 		return id;
@@ -80,17 +80,22 @@ public class Election implements Serializable{
 	public void setVotes(List<Vote> votes) {
 		this.votes = votes;
 	}
-	public LocalDate getStartTime() {
+	public Timestamp getStartTime() {
 		return startTime;
 	}
-	public void setStartTime(LocalDate startTime) {
-		this.startTime = startTime;
+	public void setStartTime(String startTime) {
+		this.startTime = Timestamp.valueOf(startTime);
 	}
-	public LocalDate getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
-	public void setEndTime(LocalDate endTime) {
-		this.endTime = endTime;
+	public void setEndTime(String endTime) {
+		this.endTime = Timestamp.valueOf(endTime);
+	}
+	@Override
+	public String toString() {
+		return "Election [id=" + id + ", name=" + name + ", description=" + description + ", candidates=" + candidates
+				+ ", votes=" + votes + ", startTime=" + startTime + ", endTime=" + endTime + "]";
 	}
 	
 	

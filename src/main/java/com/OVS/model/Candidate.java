@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Candidate")
 public class Candidate {
@@ -22,10 +24,11 @@ public class Candidate {
 	private String email;
 	@Column(nullable=false)
 	private String name;
-	@Column(nullable=false)
+	@Column(nullable=true)
 	private String party;
 	private String imageurl;
-	@OneToMany(mappedBy = "candidate" , fetch = FetchType.EAGER)
+	@JsonIgnore
+	@OneToMany(mappedBy = "candidate" , fetch = FetchType.LAZY)
 	private List<ElectionCandidate>electionCandidate;
 	public Candidate() {
 		super();

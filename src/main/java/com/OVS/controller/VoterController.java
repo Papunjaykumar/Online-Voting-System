@@ -1,34 +1,60 @@
 package com.OVS.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.OVS.model.Election;
-import com.OVS.repo.CandidateRepository;
+
+import com.OVS.model.ElectionCandidate;
+import com.OVS.model.Vote;
+import com.OVS.model.Voter;
+
+import com.OVS.service.ElectionCandidateService;
 import com.OVS.service.ElectionService;
-import com.OVS.service.VotingService;
+import com.OVS.service.VoteService;
+
 
 @RestController
-@RequestMapping("/vote")
 public class VoterController {
-	@Autowired
-	private VotingService voteserv;
+	
 	
 	@Autowired
 	private ElectionService electServ;
+	@Autowired
+	private ElectionCandidateService electcandiServ;
 	
-	@PostMapping("/doVote/{id}")
-	public void doVote(@PathVariable Long id) {
-		voteserv.voteForCandidate(id);
+	@Autowired
+	private VoteService voteserv;
+	
+	@PostMapping("/doVote/{electioncandidateid}")
+	public ResponseEntity<Object> doVote(@RequestBody Voter voter,@PathVariable String electioncandidateid){
 		
-	}
-	@GetMapping("/getElection/{id}")
-	public Election getElectionById(@PathVariable Long id) {
-		return this.electServ.getElectionByid(id);
+		Long id=Long.parseLong(electioncandidateid);
+		
+		ElectionCandidate electcandi=this.electcandiServ.getElectionCandidateById(id);
+		Vote vote=this.voteserv.getByVoterAndElection(voter, electcandi.getElection());
+		if(vote==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("You are not eligible to vote for this election");
+			
+		}
+		if(vote.isVoted()) {
+			
+			return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body("You have already given the vote thank you!");
+		}
+		
+		vote.setVoted(true);
+		this.voteserv.updateVote(vote);
+		
+		electcandi.setVoteCount(electcandi.getVoteCount()+1);
+		System.out.println(electcandi);
+		this.electcandiServ.updateElectionCandidate(electcandi);
+		
+		return ResponseEntity.ok("You have successfully voted thank you!");
 	}
 
 }

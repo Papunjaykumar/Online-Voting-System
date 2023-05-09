@@ -38,7 +38,7 @@ public class VoteServiceImpl implements VoteService {
 	@Override
 	public Vote getByVoterAndElection(Voter voter, Election election) {
 		// TODO Auto-generated method stub
-		return this.voteRepo.findByElectionAndVoter(voter, election);
+		return this.voteRepo.findAllByElectionAndVoter(voter, election);
 	}
 	
 	
