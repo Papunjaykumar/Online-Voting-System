@@ -8,10 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.OVS.model.User;
 
 @Controller
+@RequestMapping("/home")
 public class HomeController {
 
 	@GetMapping("/index")
@@ -27,6 +29,11 @@ public class HomeController {
         model.addAttribute("user", user);
         return "register";
     }
+	
+	@GetMapping("/login")
+	public String doLogin() {
+		return "login";
+	}
 	
 	
 }
