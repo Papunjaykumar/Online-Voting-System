@@ -3,6 +3,7 @@ package com.OVS.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import com.OVS.model.Voter;
 import com.OVS.service.ElectionCandidateService;
 import com.OVS.service.ElectionService;
 import com.OVS.service.VoteService;
+import com.OVS.service.VoterService;
 
 
 @RestController
@@ -30,6 +32,9 @@ public class VoterController {
 	
 	@Autowired
 	private VoteService voteserv;
+	
+	@Autowired
+	private VoterService voterserv;
 	
 	@PostMapping("/doVote/{electioncandidateid}")
 	public ResponseEntity<Object> doVote(@RequestBody Voter voter,@PathVariable String electioncandidateid){
@@ -55,6 +60,18 @@ public class VoterController {
 		this.electcandiServ.updateElectionCandidate(electcandi);
 		
 		return ResponseEntity.ok("You have successfully voted thank you!");
+	}
+	
+	@GetMapping("/getVoter/{id}")
+	public ResponseEntity<Object> getVoterById(@PathVariable String id){
+		Long voterId=Long.parseLong(id);
+		
+		Voter voter=this.voterserv.findVoterById(voterId);
+		if(voter==null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No Voter for the specific id is present.Please Give the Correct voterId" );
+		}
+		return ResponseEntity.ok(voter);
+		
 	}
 
 }

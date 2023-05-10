@@ -29,7 +29,7 @@ public class Voter {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_email",referencedColumnName = "email", nullable=false)
 	private User user;
-	@OneToMany(mappedBy = "voter",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "voter",fetch=FetchType.LAZY)
 	private List<Vote>votes;
 	public Voter() {
 		super();

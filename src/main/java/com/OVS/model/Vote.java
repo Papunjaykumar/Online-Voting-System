@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 ;
 
 @Entity
@@ -16,6 +18,8 @@ public class Vote {
 	private Long id;
 	
 	private boolean isVoted;
+	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="voter_id",nullable=false)
 	private Voter voter;

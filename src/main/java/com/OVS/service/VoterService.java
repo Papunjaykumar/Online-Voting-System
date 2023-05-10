@@ -11,6 +11,7 @@ public interface VoterService {
 	Voter getByEmail(String email);
 	void deleteVoterById(Long id);
 	Voter findVoterById(Long id);
+	
 
 
 }
