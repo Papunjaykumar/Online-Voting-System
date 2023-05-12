@@ -1,0 +1,8 @@
+.bg{
+    background-image:linear-gradient(rgba(248, 248, 143, 0.6),rgba(245, 247, 173, 0.963)),  url("../image/vote.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    
+}

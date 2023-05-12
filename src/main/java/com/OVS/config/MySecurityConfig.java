@@ -34,7 +34,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 			.antMatchers("/image/favicon.ico").permitAll()
-			.antMatchers("/index","/register","js/**","/images/**").permitAll()
+			.antMatchers("/","js/**","/image/**","/css/**").permitAll()
 			.antMatchers("/home/**").permitAll()
 			.antMatchers("/user/**").hasRole("USER")
 			.antMatchers("/voter/**").hasRole("VOTER")

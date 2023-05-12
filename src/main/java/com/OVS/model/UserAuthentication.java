@@ -13,6 +13,18 @@ public class UserAuthentication {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
+	public UserAuthentication(String email, String password, String role) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
+
+
 	public String getEmail() {
 		return email;
 	}

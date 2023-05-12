@@ -1,5 +1,6 @@
 package com.OVS.model;
 import java.io.Serializable;
+import java.sql.Date;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -7,8 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="usertable")
@@ -17,6 +21,8 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(unique=true,nullable = false)
+	@NotBlank(message="Username field is required")
+	@Size(min=2,max=20,message="min 2 and max 20 character are allowed !!")
 	private String username;
 	@Column(nullable = false)
 	private String password;
@@ -26,6 +32,7 @@ public class User implements Serializable {
 	@Column(nullable = false)
 	private String firstName;
 	private String lastName;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateOfBirth;
 	private boolean isAdmin;
 	private boolean isAuthorize;
@@ -35,7 +42,7 @@ public class User implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	public User(Long id, String username, String password, String email, String firstName, String lastName,
-			String dateOfBirth, boolean isAdmin, boolean isAuthorize) {
+			LocalDate dateOfBirth, boolean isAdmin, boolean isAuthorize) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -43,7 +50,7 @@ public class User implements Serializable {
 		this.email = email;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dateOfBirth =  LocalDate.parse(dateOfBirth);
+		this.dateOfBirth = dateOfBirth ;
 		System.out.println(isAdmin+" "+isAuthorize);
 		this.isAdmin = isAdmin;
 		this.isAuthorize = isAuthorize;
@@ -87,8 +94,8 @@ public class User implements Serializable {
 	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = LocalDate.parse(dateOfBirth);;
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	public boolean isAdmin() {
 		return isAdmin;
