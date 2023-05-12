@@ -27,6 +27,7 @@ public class Candidate {
 	@Column(nullable=true)
 	private String party;
 	private String imageurl;
+	private UserRole role=UserRole.CANDIDATE;
 	@JsonIgnore
 	@OneToMany(mappedBy = "candidate" , fetch = FetchType.LAZY)
 	private List<ElectionCandidate>electionCandidate;
@@ -85,6 +86,15 @@ public class Candidate {
 	public void setElectionCandidate(List<ElectionCandidate> electionCandidate) {
 		this.electionCandidate = electionCandidate;
 	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
 	
 	
 	

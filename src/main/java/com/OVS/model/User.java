@@ -29,6 +29,7 @@ public class User implements Serializable {
 	private LocalDate dateOfBirth;
 	private boolean isAdmin;
 	private boolean isAuthorize;
+	private UserRole role=UserRole.USER;
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -101,13 +102,21 @@ public class User implements Serializable {
 	}
 	public void setAuthorize(boolean isAuthorize) {
 		this.isAuthorize = isAuthorize;
+	}	
+	public UserRole getRole() {
+		return role;
+	}
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", isAdmin="
-				+ isAdmin + ", isAuthorize=" + isAuthorize + "]";
+				+ isAdmin + ", isAuthorize=" + isAuthorize + ", role=" + role + "]";
 	}
+	
+	
 	
 	
 }

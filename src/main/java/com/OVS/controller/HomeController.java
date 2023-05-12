@@ -30,7 +30,7 @@ public class HomeController {
         return "register";
     }
 	
-	@GetMapping("/login")
+	@GetMapping("/loginPage")
 	public String doLogin() {
 		return "login";
 	}

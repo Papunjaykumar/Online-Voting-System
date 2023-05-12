@@ -26,6 +26,7 @@ public class Voter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private UserRole role=UserRole.VOTER;
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_email",referencedColumnName = "email", nullable=false)
 	private User user;
@@ -59,6 +60,13 @@ public class Voter {
 	public void setVotes(List<Vote> votes) {
 		this.votes = votes;
 	}
+	public UserRole getRole() {
+		return role;
+	}
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
 	
 	
 	
