@@ -28,6 +28,7 @@ public class SimpleAuthenticationSuccesshandler implements AuthenticationSuccess
 		
 		authorities.forEach(authority->{
 			if(authority.getAuthority().equals("ROLE_USER")) {
+				System.out.println("ROLE_USER");
 				try {
 					redirectstrategy.sendRedirect(request, response, "/user/home");
 				}catch(Exception ex) {

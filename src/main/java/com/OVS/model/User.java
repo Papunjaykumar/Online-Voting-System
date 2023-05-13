@@ -21,10 +21,11 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Column(unique=true,nullable = false)
-	@NotBlank(message="Username field is required")
+	@NotBlank(message="Username field is required !!")
 	@Size(min=2,max=20,message="min 2 and max 20 character are allowed !!")
 	private String username;
 	@Column(nullable = false)
+	
 	private String password;
 	
 	@Column(unique=true,nullable = false)

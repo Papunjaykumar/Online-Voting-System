@@ -74,6 +74,7 @@ footer{
     padding: 5px;
     margin: 0px;
     background: cadetblue;
+    	
 }
 .sociallogo{
     text-align: center;
@@ -95,4 +96,55 @@ footer{
 	padding:20px;
 	background:#ffffff;
 	margin-bottom:30px;
+	padding-top:45px;
+}
+/* sidebar */
+
+@media only screen and (max-width:600px) {
+	.sidebar {
+		display: none;
+		width: 80% !important;
+		background: white;
+		height: 100vh;
+		position: fixed;
+		margin-top: 20px;
+	}
+	.content{
+		margin-left:0% !important;
+	}
+}
+
+.sidebar{
+	width:18%;
+	background: #00E3CD;
+	height:100%;
+	position:fixed;
+	padding-top:20px;
+	
+}
+.sidebar a{
+	display:block;
+	width:100%;
+	padding:10px 25px;
+	text-decoration:none;
+	color:gray;
+}
+.sidebar a:hover{
+	background:#e2e2e2;
+}
+.sidebar .divider{
+	height:.5px;
+	width:100px;
+	background:green;
+	margin-top:10px;
+}
+.content{
+	margin-left:20%;
+}
+.sidebar .crossBtn{
+	position:absolute;
+	top:0;
+	right:35px;
+	font-size:36px;
+	cursor:pointer;
 }

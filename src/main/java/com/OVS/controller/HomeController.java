@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,8 +21,11 @@ import com.OVS.repo.UserAuthenticationRepository;
 import com.OVS.service.UserService;
 
 @Controller
-@RequestMapping("/home")
+
 public class HomeController {
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserAuthenticationRepository userAuthRepo;
@@ -44,16 +48,23 @@ public class HomeController {
     }
 	//handler for  registering user
 	@PostMapping("/do_register")
-	public String registration(@Valid @ModelAttribute("user") User user,@RequestParam(value="agreement",defaultValue="false") boolean agreement,Model model,BindingResult result,HttpSession session) {
+	public String registration(@Valid @ModelAttribute("user") User user,BindingResult result,@RequestParam(value="agreement",defaultValue="false") boolean agreement,Model model,HttpSession session) {
 		
 		
 		try {
 			if(!agreement) {
 				throw new Exception("You have not agreed the terms and condidtions");
 			}
+			if(result.hasErrors()) {
+				
+				System.out.println("ERROR"+ result.toString());
+				model.addAttribute("user",user);
+				return "register";
+			}
 			user.setAdmin(false);
 			user.setAuthorize(false);
 			user.setRole(UserRole.USER);
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
 			System.out.println(agreement);
 			
 			userAuthRepo.save(new UserAuthentication(user.getEmail(),user.getPassword(),"ROLE_"+user.getRole()));
@@ -79,9 +90,13 @@ public class HomeController {
 	}
 	
 	@GetMapping("/loginPage")
-	public String doLogin() {
+	public String doLogin(Model model) {
+		
+		
 		return "login";
 	}
+	
+	
 	
 	
 }

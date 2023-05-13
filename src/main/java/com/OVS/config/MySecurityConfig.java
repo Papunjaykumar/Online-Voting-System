@@ -3,11 +3,13 @@ package com.OVS.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,10 +24,24 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private SimpleAuthenticationSuccesshandler successHandler;
 	
+	@Bean
+	public BCryptPasswordEncoder getPasswordEncode() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider daoAuthenticationprovider=new DaoAuthenticationProvider();
+		daoAuthenticationprovider.setUserDetailsService(userdetailservice);
+		daoAuthenticationprovider.setPasswordEncoder(getPasswordEncode());
+		
+		return daoAuthenticationprovider;
+	}
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(userdetailservice);
+		auth.authenticationProvider(authenticationProvider());
 	}
 
 	@Override
@@ -34,14 +50,13 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests()
 			.antMatchers("/image/favicon.ico").permitAll()
-			.antMatchers("/","js/**","/image/**","/css/**").permitAll()
-			.antMatchers("/home/**").permitAll()
+			.antMatchers("js/**","/image/**","/css/**").permitAll()
+			
 			.antMatchers("/user/**").hasRole("USER")
 			.antMatchers("/voter/**").hasRole("VOTER")
 			.antMatchers("/candidate/**").hasRole("CANDIDATE")
 			.antMatchers("/admin/**").hasRole("ADMIN")
-			.anyRequest()
-			.authenticated()
+			.antMatchers("/**").permitAll()
 			.and()
 			.formLogin()
 			.loginPage("/loginPage")
@@ -50,7 +65,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 			.successHandler(successHandler)
 			.and()
 			.logout()
-			.logoutSuccessUrl("/loginPage")
+		//	.logoutSuccessUrl("/loginPage")
 			.permitAll();
 		
 		http.csrf().disable();
@@ -58,8 +73,5 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 		
 	}
 	
-	@Bean
-	public PasswordEncoder getPasswordEncode() {
-		return NoOpPasswordEncoder.getInstance();
-	}
+	
 }

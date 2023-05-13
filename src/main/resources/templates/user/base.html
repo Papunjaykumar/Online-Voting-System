@@ -15,6 +15,19 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- script.js -->
+    <script type="text/javascript" th:src="@{/js/script.js}"></script>
+    
+    <!--Jquery cdn  -->
+    <script src="https://code.jquery.com/jquery-3.7.0.slim.js" 
+    integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" 
+    crossorigin="anonymous"></script>
+    
 
 
 </head>
@@ -23,7 +36,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bgprimary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/index}">OVoSys</a>
+        <a class="navbar-brand" th:href="@{/user/home}">OVoSys</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -31,23 +44,50 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
                 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/loginPage}">Login</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/user/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/about}">About</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/about}" th:text="${user.username}"></a>
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/register}">SignUp</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+<!-- end of nav bar -->
+
+<!-- side bar  -->
+<div class="sidebar">
+		
+		<span class="crossBtn" onclick="toggleSidebar()">&times;</span>
+	<a class="item" href="#"><i class="fa-solid fa-house"></i>Home</a>
+	<a class="item" href="#"><i class="fa-solid fa-user-group" style="color: #a5a497;"></i>viewCandidate</a>
+	<!-- <a class="item" href="#">Update</a> -->
+	<a class="item" href="#"><i class="fa-solid fa-user"></i>Profile</a>
+	<a class="item" href="#"><i class="fa-solid fa-gear"></i>Setting</a>
+	<a class="item" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+	<div class="divider"></div>
+	
+	
+</div>
+<!-- End of side bar -->
+
+<!-- content bar -->
+<div class="content">
+	
+	<i class="fas fa-bars" onclick="toggleSidebar()"></i>
+	
+	<div th:replace="${content}"></div>
+
+</div>
+
+<!-- End of content bar -->
 
 
  
- <div th:replace="${content}"></div>
  
  
  <footer class="bgprimary">
@@ -61,7 +101,7 @@
 			 &copy Copyright 2023. All Right Reserved
 		</center>
 	</footer>
-
-	
+ 
 </body>
+ 
 </html>
