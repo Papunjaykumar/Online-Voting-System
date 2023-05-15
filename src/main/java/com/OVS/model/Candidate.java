@@ -2,6 +2,7 @@ package com.OVS.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ public class Candidate {
 	private String imageurl;
 	private UserRole role=UserRole.CANDIDATE;
 	@JsonIgnore
-	@OneToMany(mappedBy = "candidate" , fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "candidate" , fetch = FetchType.LAZY ,cascade = CascadeType.REMOVE)
 	private List<ElectionCandidate>electionCandidate;
 	public Candidate() {
 		super();

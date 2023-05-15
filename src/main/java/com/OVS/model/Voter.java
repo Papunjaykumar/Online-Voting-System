@@ -3,6 +3,7 @@ package com.OVS.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Voter {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_email",referencedColumnName = "email", nullable=false)
 	private User user;
-	@OneToMany(mappedBy = "voter",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy = "voter",fetch=FetchType.LAZY ,cascade = CascadeType.REMOVE)
 	private List<Vote>votes;
 	public Voter() {
 		super();

@@ -86,6 +86,15 @@ public class AdminControllerNew {
 		model.addAttribute("user", user);
 		
 	}
+	
+	@GetMapping("/profile")
+	public String getProfile(Model model,Principal principal) {
+		String email = principal.getName();
+		User user = this.userserv.getUserByEmail(email);
+		
+		return"/admin/profile";
+		
+	}
 
 	//admin panel
 	
@@ -437,6 +446,7 @@ public class AdminControllerNew {
 		
 		return "redirect:/admin/addelectionvoter/"+eid;
 	}
+	
 	
 	
 
