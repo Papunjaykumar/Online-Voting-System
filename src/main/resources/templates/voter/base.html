@@ -47,7 +47,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/user/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/about}" th:text="${user.username}"></a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/about}" th:text="${username}"></a>
                 </li>
                 
                 <li class="nav-item">
@@ -66,9 +66,11 @@
 	<a class="item" href="#"><i class="fa-solid fa-house"></i>Home</a>
 	<a class="item" href="#"><i class="fa-solid fa-user-group" style="color: #a5a497;"></i>viewCandidate</a>
 	<!-- <a class="item" href="#">Update</a> -->
+	<a class="item" th:href="@{/voter/votePanel}" href="#"><i class="fa-solid fa-check-to-slot"></i>Give Vote</a>
 	<a class="item" href="#" th:href="@{/user/viewProfile}"><i class="fa-solid fa-user"></i>Profile</a>
 	<a class="item" href="#"><i class="fa-solid fa-gear"></i>Setting</a>
-	<a class="item" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+	<a class="item" th:href="@{/logout}" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+	
 	<div class="divider"></div>
 	
 	

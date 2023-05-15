@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin_dashboard</title>
+</head>
+<body>
+	<section>
+		
+	<div class="container">
+		<h1 class="text-center">Elections</h1>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Election Id</th>
+						<th scope="col">Election Name</th>
+						<th scope="col">Description</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">End Time</th>
+						<th scope="col"></th>
+
+
+					</tr>
+				</thead>
+				<tbody>
+				<!-- th:unless="${obj.isAdmin}" -->
+					<tr th:each="obj,i :${elections}"  >
+						
+						<td th:text="${i.count}"/>
+						<td th:text="${obj.id}">
+						<td th:text="${obj.name}">
+						<td th:text="${obj.description}">
+						<td th:text="${obj.startTime}">
+						<td th:text="${obj.endTime}">
+						<td><a th:href="@{'/admin/removeelection/'+${obj.id}}" class="btn bgprimary">Remove Election</a></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script th:inline="javascript">
+/*<![CDATA[*/
+    
+
+    const success = /*[[${session.success}]]*/ false;
+    
+    const failure= /*[[${session.failure}]]*/ false;
+    console.log({success,failure})
+    if(success){
+    	swal("Election Deleted Successfully", success, "success");	
+    }
+        
+
+    
+/*]]>*/
+</script>
+<th:block th:if="${session.success}"th:text="${#session.removeAttribute('success')}"></th:block>
+
+		
+
+
+	</section>
+
+
+
+
+
+
+
+</body>
+</html>

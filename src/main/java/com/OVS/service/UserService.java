@@ -14,4 +14,5 @@ public interface UserService {
 	public void deleteUser(Long id);
 	public User getUserByUserName(String name);
 	public List<User> getAllUnAuthorizeUser(boolean flag);
+	public User updateUser(User user);
 }

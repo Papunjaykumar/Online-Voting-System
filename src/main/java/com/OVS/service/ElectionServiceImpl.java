@@ -30,12 +30,10 @@ public class ElectionServiceImpl implements ElectionService{
 	@Override
 	public Election addElection(Election election) {
 		
-		Election tmp=this.electRepo.findById(election.getId()).orElse(null);
+		//Election tmp=this.electRepo.findById(election.getId()).orElse(null);
 		
-		if(tmp==null) {
-			tmp=this.electRepo.save(election);			
-		}		
-		return tmp;
+				
+		return this.electRepo.save(election);
 	}
 
 	@Override

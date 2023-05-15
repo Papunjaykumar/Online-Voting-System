@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin_dashboard</title>
+</head>
+<body>
+	<section>
+
+
+
+		<div class="card ms-3 me-3 mt-5">
+			<div class="card-body">
+				<h1 class="text-center">Add Candidate</h1>
+
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<form method="post"action="" th:action="@{/admin/process_addcandidate}" enctype="multipart/form-data" th:object="${candidate}" class="mt-2">
+
+								<!-- name -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa fa-plus fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="text" id="name" name="name"
+										placeholder="Enter Name Here" class="form-control">
+								</div>
+								
+								<!-- Email -->
+								<div class="input-group">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa fa-envelope fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="email" id="email" name="email"
+										placeholder="Enter Email Id" class="form-control">
+								</div>
+								
+								<!-- party -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa fa-user-alt fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="text" id="party" name="party"
+										placeholder="Enter Party Name" class="form-control">
+								</div>
+								
+								<!-- Election Id -->
+								<!-- <div class="input-group mt-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fas fa-vote-yea fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="text" id="electioncandidate" name="name"
+										placeholder="Enter Election id" class="form-control">
+								</div> -->
+								
+								<!-- image url -->
+								<div class="custom-file mt-3">
+									<input type="file" name="profileImage">
+								</div>
+								
+								<div class="container text-center ">
+									<button class="btn btn-outline-primary text-white bgprimary">Save Candidate</button>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+
+
+
+</body>
+</html>

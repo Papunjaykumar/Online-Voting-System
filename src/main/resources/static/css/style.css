@@ -2,17 +2,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Orelega+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     /* font-family: 'Orelega One', cursive; */
     font-family: 'poppins',sans-serif;
+    
+    
 }
 body{
     margin: 0;
     padding: 0;
     min-height: 100vh; 
+    
+   
 }
 .bg{
     background-image:linear-gradient(rgba(248, 248, 143, 0.6),rgba(245, 247, 173, 0.963)),  url("../image/vote.jpg");
@@ -71,11 +76,16 @@ section #text:hover{
 } 
 
 footer{
+	
+   
     padding: 5px;
     margin: 0px;
     background: cadetblue;
-    	
-}
+    
+   
+   
+
+  }
 .sociallogo{
     text-align: center;
     padding: 15px;
@@ -90,6 +100,8 @@ footer{
 }
 .bgprimary{
 	background:#009688 !important;
+	 
+	
 }
 
 .my-card{
@@ -100,10 +112,10 @@ footer{
 }
 /* sidebar */
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:700px) {
 	.sidebar {
 		display: none;
-		width: 80% !important;
+		width: 100% !important;
 		background: white;
 		height: 100vh;
 		position: fixed;
@@ -120,6 +132,7 @@ footer{
 	height:100%;
 	position:fixed;
 	padding-top:20px;
+	z-index:999999999999999999999999999999999999
 	
 }
 .sidebar a{
@@ -140,6 +153,7 @@ footer{
 }
 .content{
 	margin-left:20%;
+	
 }
 .sidebar .crossBtn{
 	position:absolute;

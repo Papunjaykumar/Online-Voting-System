@@ -28,13 +28,16 @@
     integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" 
     crossorigin="anonymous"></script>
     
+    <!-- sweet alert cdn -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
 
 </head>
 <body>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bgprimary">
+<nav class="  navbar navbar-expand-lg navbar-dark bgprimary">
     <div class="container-fluid">
         <a class="navbar-brand" th:href="@{/user/home}">OVoSys</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +47,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
                 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/user/home}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/admin/panel}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/about}" th:text="${user.username}"></a>
@@ -60,15 +63,15 @@
 <!-- end of nav bar -->
 
 <!-- side bar  -->
-<div class="sidebar">
+<div class="sidebar ">
 		
 		<span class="crossBtn" onclick="toggleSidebar()">&times;</span>
-	<a class="item" href="#"><i class="fa-solid fa-house"></i>Home</a>
-	<a class="item" href="#"><i class="fa-solid fa-user-group" style="color: #a5a497;"></i>viewCandidate</a>
+	<a class="item" href="#" th:href="@{/admin/panel}"><i class="fa-solid fa-house"></i> Home</a>
+	<a class="item" href="#" th:href="@{/admin/voter}"><i class="fa-solid fa-user"></i> Voter</a>
 	<!-- <a class="item" href="#">Update</a> -->
-	<a class="item" href="#" th:href="@{/user/viewProfile}"><i class="fa-solid fa-user"></i>Profile</a>
-	<a class="item" href="#"><i class="fa-solid fa-gear"></i>Setting</a>
-	<a class="item" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+	<a class="item" href="#" th:href="@{/admin/candidate}"><i class="fa-solid fa-user"></i> Candidate</a>
+	<a class="item" href="#" th:href="@{/admin/election}"><i class="fa-solid fa-check-to-slot"></i> Election</a>
+	<a class="item" href="#" th:href="@{/admin/result}"><i class="fa-solid fa-square-poll-horizontal"></i> Result</a>
 	<div class="divider"></div>
 	
 	
@@ -76,24 +79,17 @@
 <!-- End of side bar -->
 
 <!-- content bar -->
-<div class="content">
+<div class="content ">
 	
-	<i class="fas fa-bars" onclick="toggleSidebar()"></i>
+	<i class="fas fa-bars " onclick="toggleSidebar()"></i>
 	
 	<div th:replace="${content}"></div>
 
 </div>
 
 <!-- End of content bar -->
-
-
- 
- 
- 
-
- 
-</body>
-  <!-- <footer class="bgprimary">
+<!-- <footer class="bgprimary">
+         
 		<center>
 			 <div class="sociallogo">
 				<a href="#"><i class="fab fa-facebook fa-2x"></i></a> <a href="#"><i
@@ -104,4 +100,12 @@
 			 &copy Copyright 2023. All Right Reserved
 		</center>
 	</footer> -->
+
+ 
+ 
+ 
+
+ 
+</body>
+
 </html>

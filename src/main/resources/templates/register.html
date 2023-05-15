@@ -33,7 +33,7 @@
 
 						<h1 class="text-center">Register Here!!</h1>
 
-						<form novalidate method="post" role="form" th:action="@{/home/do_register}"
+						<form novalidate method="post" role="form" th:action="@{/do_register}"
 							th:object="${user}">
 
 							<div class="form-group mb-3">
@@ -104,7 +104,7 @@
 									class=" btn bgprimary btn-block text-white">register</button>
 								<button type="reset"
 									class="btn btn-warning btn-block text-white">reset</button>
-								<span>Already registered? <a th:href="@{/home/loginPage}">Login
+								<span>Already registered? <a th:href="@{/loginPage}">Login
 										here</a></span>
 							</div>
 						</form>

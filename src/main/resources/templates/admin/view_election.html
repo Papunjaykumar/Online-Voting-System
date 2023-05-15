@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>View_Candidates</title>
+</head>
+<body>
+	<section>
+		
+		<h1 class="text-center">Elections</h1>
+		<div class="container">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Election Id</th>
+						<th scope="col">Election Name</th>
+						<th scope="col">Description</th>
+						<th scope="col">Start Time</th>
+						<th scope="col">End Time</th>
+						<th scope="col"></th>
+						<th scope="col"></th>
+						
+
+
+					</tr>
+				</thead>
+				<tbody>
+				<!-- th:unless="${obj.isAdmin}" -->
+					<tr th:each="obj,i :${elections}"  >
+						
+						<td th:text="${i.count}"/>
+						<td th:text="${obj.id}">
+						<td th:text="${obj.name}">
+						<td th:text="${obj.description}">
+						<td th:text="${obj.startTime}">
+						<td th:text="${obj.endTime}">
+						<td><a th:href="@{'/admin/addelectioncandidate/'+${obj.id}}" class="btn bgprimary">Add Candidate</a></td>
+						<td><a th:href="@{'/admin/addelectionvoter/'+${obj.id}}" class="btn bgprimary">Add Voter</a></td>
+						
+						
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+
+	</section>
+
+
+
+
+
+
+
+</body>
+</html>

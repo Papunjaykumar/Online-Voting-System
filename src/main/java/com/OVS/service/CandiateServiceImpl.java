@@ -1,5 +1,6 @@
 package com.OVS.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,12 @@ public class CandiateServiceImpl implements CandidateService{
 		public Candidate getCandidateByEmail(String email) {
 			
 			return this.candirepo.findByEmail(email);
+		}
+
+		@Override
+		public List<Candidate> getAllCandidate() {
+			// TODO Auto-generated method stub
+			return this.candirepo.findAll();
 		}
 
 		

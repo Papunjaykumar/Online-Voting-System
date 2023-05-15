@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin_dashboard</title>
+</head>
+<body>
+	<section>
+		<h1 class="text-center">Welcome to Voter Pannel</h1>
+
+		<div class="container mt-5 ms-5" >
+			<div class="row">
+				<div class="col-3">
+					<div class="card" style="width: 18rem;">
+						<img src="..." th:src="@{/image/addelection.png}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title"> Add Election</h5>
+							<p class="card-text"></p>
+							<a href="" th:href="@{/admin/addelection}" class="btn btn-primary d-grid">ADD</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-3">
+
+					<div class="card" style="width: 18rem;">
+						<img src="..." th:src="@{/image/groupvoter.jpg}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">View Election</h5>
+							<p class="card-text"></p>
+							<a href="#" th:href="@{/admin/viewelection}" class="btn btn-primary d-grid">View Election</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-3">
+
+					<div class="card" style="width: 18rem;">
+						<img src="..." th:src="@{/image/removevoter.png}" class="card-img-top" alt="...">
+						<div class="card-body">
+							<h5 class="card-title">Remove Election</h5>
+							<p class="card-text"></p>
+							<a href="#" th:href="@{/admin/removeelection} " class="btn btn-primary d-grid">Remove Election</a>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+
+	</section>
+
+
+
+
+
+
+
+</body>
+</html>

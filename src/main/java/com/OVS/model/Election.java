@@ -2,6 +2,8 @@ package com.OVS.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -22,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="Election")
 public class Election implements Serializable{
 	
+	   
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -84,13 +87,25 @@ public class Election implements Serializable{
 		return startTime;
 	}
 	public void setStartTime(String startTime) {
-		this.startTime = Timestamp.valueOf(startTime);
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		 LocalDateTime sTime = LocalDateTime.parse(startTime, inputFormatter);
+		 DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		 String startDateTime = sTime.format(outputFormatter);
+
+		this.startTime = Timestamp.valueOf(startDateTime);
+		
 	}
 	public Timestamp getEndTime() {
 		return endTime;
 	}
 	public void setEndTime(String endTime) {
-		this.endTime = Timestamp.valueOf(endTime);
+		DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+		 LocalDateTime eTime = LocalDateTime.parse(endTime, inputFormatter);
+		 DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		 String endDateTime = eTime.format(outputFormatter);
+
+		
+		this.endTime = Timestamp.valueOf(endDateTime);
 	}
 	@Override
 	public String toString() {

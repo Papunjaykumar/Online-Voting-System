@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="admin/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin_dashboard</title>
+</head>
+<body>
+	<section>
+
+
+
+		<div class="card ms-3 me-3 mt-5">
+			<div class="card-body">
+				<h1 class="text-center">Add Election</h1>
+
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+							<form method="post"action="" th:action="@{/admin/process_addelection}" enctype="multipart/form-data" th:object="${election}" class="mt-2">
+
+								<!-- name -->
+								<div class="input-group mb-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa fa-plus fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="text" id="name" name="name"
+										placeholder="Enter Election Name " class="form-control">
+								</div>
+								
+								<!-- Email -->
+								<div class="input-group">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa fa-pen fa-2x"></i>
+										</div>
+
+									</div>
+									<textarea  id="description" name="description"
+										placeholder="Write Description" class="form-control"></textarea>
+								</div>
+								
+								
+								
+								<!-- Start time -->
+								
+								<div class="input-group mt-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa-solid fa-calendar-days fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="datetime-local" id="startTime" name="startTime">
+								</div>
+								
+								<!-- End time -->
+								<div class="input-group mt-3">
+									<div class="input-group-prepend ">
+										<div class="input-group-text ">
+											<i class="fa-solid fa-calendar-days fa-2x"></i>
+										</div>
+
+									</div>
+									<input type="datetime-local" id="endTime" name="endTime">
+								</div>
+								
+								
+								
+								
+								<div class="container text-center ">
+									<button class="btn btn-outline-primary text-white bgprimary">Save Candidate</button>
+								</div>
+								
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<script th:inline="javascript">
+/*<![CDATA[*/
+    
+
+    const success = /*[[${session.success}]]*/ false;
+    
+    const failure= /*[[${session.failure}]]*/ false;
+    console.log({success,failure})
+    if(success){
+    	swal("Added Successful", success, "success");
+    	
+    	
+    }
+        
+
+    
+/*]]>*/
+</script>
+<!-- removing the attribute from the session -->
+<th:block th:if="${session.success}"th:text="${#session.removeAttribute('success')}"></th:block>
+		
+        
+
+    
+
+
+	</section>
+
+
+
+
+
+
+
+</body>
+</html>

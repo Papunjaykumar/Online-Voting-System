@@ -44,7 +44,13 @@ public class SimpleAuthenticationSuccesshandler implements AuthenticationSuccess
 			}
 			else if(authority.getAuthority().equals("ROLE_CANDIDATE")) {
 				try {
-					redirectstrategy.sendRedirect(request, response, "/candidate/");
+					redirectstrategy.sendRedirect(request, response, "/candidate/home");
+				}catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}else if(authority.getAuthority().equals("ROLE_VOTER")) {
+				try {
+					redirectstrategy.sendRedirect(request, response, "/voter/home");
 				}catch(Exception ex) {
 					ex.printStackTrace();
 				}

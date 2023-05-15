@@ -39,6 +39,7 @@ public class UserController {
 	 * 
 	 * return "change_password"; }
 	 */
+	/* @GetMapping("/viewProfile") */
 	 
 
 }

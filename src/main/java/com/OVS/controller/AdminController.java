@@ -32,7 +32,7 @@ import com.OVS.service.VoteService;
 import com.OVS.service.VoterService;
 
 @RestController
-@RequestMapping("/admin")
+
 public class AdminController {
 	
 	@Autowired

@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService{
 		
 		return this.userRepo.findByEmail(email);
 	}
+
+	@Override
+	public User updateUser(User user) {
+		return this.userRepo.save(user);
+		
+	}
 	
 
 }
