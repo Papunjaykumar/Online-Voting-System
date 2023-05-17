@@ -246,7 +246,7 @@ public class AdminControllerNew {
 	//processing add candidate form
 	@PostMapping("/process_addcandidate")
 	public String processCandidate(@ModelAttribute("candidate")Candidate candidate,
-			@RequestParam("profileImage") MultipartFile file ) {
+			@RequestParam("profileImage") MultipartFile file,HttpSession session ) {
 		
 		try {
 			//processing and uploading files
@@ -271,14 +271,21 @@ public class AdminControllerNew {
 
 			String password=email.substring(0,i)+"123";
 			System.out.println(password);
-
+			
+			session.setAttribute("success", "Candidate record Entered");
+			
+			//adding the candidate detail in the UserAuthentication so that by using the email and password they can login
 			this.userAuthRepo.save(new UserAuthentication(candidate.getEmail(),passwordEncoder.encode(password),
 					"ROLE_" + candidate.getRole()));
+			
+			
 		}catch(Exception e) {
 			e.printStackTrace();
+			session.setAttribute("failure","Something went wrong");
+			return "redirect:/admin/addCandidate";
 		}
 		
-		return "admin/add_candidate";
+		return "redirect:/admin/addCandidate";
 	}
 	
 	@GetMapping("/viewallcandidate")

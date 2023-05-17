@@ -82,6 +82,28 @@
 				</div>
 			</div>
 		</div>
+		
+		<script th:inline="javascript">
+/*<![CDATA[*/
+    
+
+    const success = /*[[${session.success}]]*/ false;
+    
+    const failure= /*[[${session.failure}]]*/ false;
+    console.log({success,failure})
+    if(success){
+    	swal("Successful", success, "success");
+    	
+    	
+    }
+        
+
+    
+/*]]>*/
+</script>
+<!-- removing the attribute from the session -->
+<th:block th:if="${session.success}"th:text="${#session.removeAttribute('success')}"></th:block>
+				
 
 
 	</section>

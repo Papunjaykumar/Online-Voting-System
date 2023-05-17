@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,15 +25,31 @@ public class UserController {
 	@Autowired
 	private UserService userserv;
 	
+	
+	@ModelAttribute
+	public void  addCommonData(Model model ,Principal principal) {
+		
+		String email = principal.getName();
+		User user = this.userserv.getUserByEmail(email);
+		model.addAttribute("user", user);
+		
+	}
+	
 	 @GetMapping("/home")
 	public String dashboard(Model model,Principal principal) {
-		String email=principal.getName();
-		System.out.println(email);
-		User user=this.userserv.getUserByEmail(email);
-		model.addAttribute("user",user);
-		System.out.println(user);
+		
+		
 		return "user/user_dashboard";
 	}
+	 
+	 @GetMapping("/profile")
+	 public String getProfile(Model model,Principal principal) {
+		 //String email = principal.getName();
+		// User user = this.userserv.getUserByEmail(email);
+
+		 return"/user/profile";
+
+	 }
 	
 	/*
 	 * @GetMapping("/changePassword") public String changePassword() {
