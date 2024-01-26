@@ -28,6 +28,9 @@
     integrity="sha256-7GO+jepT9gJe9LB4XFf8snVOjX3iYNb0FHYr5LI1N5c=" 
     crossorigin="anonymous"></script>
     
+    <!-- sweet alert cdn -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
 
 
 </head>
@@ -44,10 +47,10 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-uppercase">
                 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/user/home}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/voter/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/about}" th:text="${username}"></a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/voter/viewProfile}" th:text="${username}"></a>
                 </li>
                 
                 <li class="nav-item">
@@ -64,11 +67,10 @@
 		
 		<span class="crossBtn" onclick="toggleSidebar()">&times;</span>
 	<a class="item" href="#"><i class="fa-solid fa-house"></i>Home</a>
-	<a class="item" href="#"><i class="fa-solid fa-user-group" style="color: #a5a497;"></i>viewCandidate</a>
+	<a class="item" href="#" th:href="@{/voter/view_candidate}"><i class="fa-solid fa-user-group" style="color: #a5a497;"></i>viewCandidate</a>
 	<!-- <a class="item" href="#">Update</a> -->
 	<a class="item" th:href="@{/voter/votePanel}" href="#"><i class="fa-solid fa-check-to-slot"></i>Give Vote</a>
-	<a class="item" href="#" th:href="@{/user/viewProfile}"><i class="fa-solid fa-user"></i>Profile</a>
-	<a class="item" href="#"><i class="fa-solid fa-gear"></i>Setting</a>
+	<a class="item" href="#" th:href="@{/voter/viewProfile}"><i class="fa-solid fa-user"></i>Profile</a>
 	<a class="item" th:href="@{/logout}" href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
 	
 	<div class="divider"></div>

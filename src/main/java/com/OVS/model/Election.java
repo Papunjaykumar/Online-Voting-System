@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,10 +33,10 @@ public class Election implements Serializable{
 	private String name;
 	private String description;
 	@JsonIgnore
-	@OneToMany(mappedBy = "election",fetch = FetchType.LAZY )
+	@OneToMany(mappedBy = "election",fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
 	private List<ElectionCandidate>candidates;
 	@JsonIgnore
-	@OneToMany(mappedBy = "election", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "election", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private List<Vote>votes;
 	private Timestamp startTime;
 	private Timestamp endTime;

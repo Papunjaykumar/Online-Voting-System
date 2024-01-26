@@ -59,17 +59,17 @@ section #text:hover{
 }
  
  #btn{
-    position:absolute ;
+    position:relative ;
     text-decoration: none;
     display: inline-block;
     padding: 8px 30px;
-    background:black;
+    background:#009688;
     color: #fff;
     font-size: 1.2em;
     font-weight: 500;
     letter-spacing: 2px;
     border-radius: 40px;
-    transform: translateY(260px);
+    /* transform: translateY(260px); */
 }
 #btn:hover{
     box-shadow: 5px 5px 10px gray;

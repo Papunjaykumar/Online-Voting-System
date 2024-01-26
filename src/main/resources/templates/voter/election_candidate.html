@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="voter/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>Voter_dashboard</title>
+</head>
+<body>
+
+	<section>
+		<div class="conatiner">
+			<div class="card">
+				<div class="card-header mb-3">
+					<h3>You have a right to give the vote</h3>
+				</div>
+				<div class="card-body">
+					<div class="card">
+						<div class="card-header text-center">
+							<h3 th:text="${election.name}"></h3>
+						</div>
+						<div class="card-body">
+							<div class="container">
+								<table class="table">
+									<thead>
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Symbol</th>
+											<th scope="col">Name</th>
+											<th scope="col">Email</th>
+											<th scope="col">Party</th>
+											<th scope="col">Vote</th>
+
+
+
+
+
+										</tr>
+									</thead>
+									<tbody>
+										<!-- th:unless="${obj.isAdmin}" -->
+										<tr th:each="obj,i :${electionCandidates}">
+
+											<td th:text="${i.count}" />
+											<td><img alt="" src="" th:src="@{'/image/'+${obj.candidate.imageurl}}" style="width:50px;">
+											<td th:text="${obj.candidate.name}">
+											<td th:text="${obj.candidate.email}">
+											<td th:text="${obj.candidate.party}">
+											<td><a id="vote"
+												th:href="@{'/voter/giveVote/'+${obj.id}+'/'+${voter.id}}"
+												class="btn btn-primary"> give vote</a></td>
+											<!-- <td><span th:if="${obj.startTime =='F'}">Female</span> <span
+										th:unless="${obj.gender == 'F'}">Male</span></td> -->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script th:inline="javascript">
+/*<![CDATA[*/
+    
+
+    const success = /*[[${session.success}]]*/ false;
+    
+    const failure= /*[[${session.failure}]]*/ false;
+    console.log({success,failure})
+    if(success){
+    	swal("Voter Successful", success, "success");
+    	
+    	
+    	
+    }else if(failure){
+    	swal("Sorry !!", failure, "error");
+    	
+    }
+        
+
+    
+/*]]>*/
+</script>
+<!-- removing the attribute from the session -->
+<th:block th:if="${session.success}"th:text="${#session.removeAttribute('success')}"></th:block>
+<th:block th:if="${session.failure}" th:text="${#session.removeAttribute('failure')}"></th:block>
+
+
+	</section>
+
+</body>
+</html>

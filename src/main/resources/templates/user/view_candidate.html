@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org "
+	th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>User_dashboard</title>
+</head>
+<body>
+		<section>
+
+			<h1 class="text-center">Candidates</h1>
+			<div class="container">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Party</th>
+
+
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<!-- th:unless="${obj.isAdmin}" -->
+						<tr th:each="obj,i :${candidates}">
+
+							<td th:text="${i.count}" />
+							<td th:text="${obj.name}">
+							<td th:text="${obj.email}">
+							<td th:text="${obj.party}">
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+</body>
+</html>

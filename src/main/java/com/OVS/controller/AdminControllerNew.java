@@ -454,6 +454,28 @@ public class AdminControllerNew {
 		return "redirect:/admin/addelectionvoter/"+eid;
 	}
 	
+//	result
+	@GetMapping("/result")
+	public String resultShow(Model model,Principal principal) {
+		
+		List<Election> allElection = this.electServ.getAllElection();
+		model.addAttribute("elections", allElection);
+		
+		return "/admin/result";
+	}
+	
+	@GetMapping("/get_election_candidate/{electionId}")
+	public String resultBoard(@PathVariable("electionId") Long electionId,Model model,Principal principal) {
+		
+		Election election = this.electServ.getElectionByid(electionId);
+		boolean status = this.electServ.eletctionStatus(election.getStartTime(), election.getEndTime());
+		model.addAttribute("status", status);
+		List<ElectionCandidate> candidateOfElections = this.electcandiServ.getCandidateOfElections(election);
+		model.addAttribute("election", election);
+		model.addAttribute("electionCandidates", candidateOfElections);
+		return "/admin/result_dashboard";
+	}
+	
 	
 	
 

@@ -15,6 +15,7 @@ public interface ElectionCandidateService {
 	void deleteElectionCandidateById(Long id);
 	void addAllElectionCandidate(List<ElectionCandidate> candidates);
 	ElectionCandidate getElectionCandidateByElectionAndCandidate(Election election,Candidate candidate);
+	public List<ElectionCandidate> getCandidateOfElections(Election election);
 	
 	
 }

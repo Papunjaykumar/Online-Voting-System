@@ -1,11 +1,13 @@
 package com.OVS.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.OVS.model.Election;
+import com.OVS.model.ElectionCandidate;
 import com.OVS.repo.ElectionRepository;
 
 @Service
@@ -63,5 +65,19 @@ public class ElectionServiceImpl implements ElectionService{
 		// TODO Auto-generated method stub
 		return this.electRepo.findByName(name);
 	}
+	@Override
+	public boolean eletctionStatus(Timestamp startTime, Timestamp endTime) {
+		// TODO Auto-generated method stub
+		Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+		System.out.println(currentTime);
+		System.out.println(startTime);
+		System.out.println(endTime);
+		if(startTime.before(currentTime) && endTime.after(currentTime)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 
 }

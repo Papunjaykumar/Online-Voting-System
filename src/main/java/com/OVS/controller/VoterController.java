@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.OVS.model.Election;
 import com.OVS.model.ElectionCandidate;
 import com.OVS.model.Vote;
 import com.OVS.model.Voter;
@@ -41,8 +41,13 @@ public class VoterController {
 		
 		Long id=Long.parseLong(electioncandidateid);
 		
+		
 		ElectionCandidate electcandi=this.electcandiServ.getElectionCandidateById(id);
-		Vote vote=this.voteserv.getByVoterAndElection(voter, electcandi.getElection());
+		
+		Election election = electcandi.getElection();
+		boolean status = this.electServ.eletctionStatus(election.getStartTime(), election.getEndTime());
+		if(status) {
+		Vote vote=this.voteserv.getByVoterAndElection(voter, election);
 		if(vote==null) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("You are not eligible to vote for this election");
 			
@@ -60,6 +65,8 @@ public class VoterController {
 		this.electcandiServ.updateElectionCandidate(electcandi);
 		
 		return ResponseEntity.ok("You have successfully voted thank you!");
+		}
+		return ResponseEntity.ok("Election is not going on");
 	}
 	
 	@GetMapping("/getVoter/{id}")

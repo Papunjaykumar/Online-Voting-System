@@ -3,49 +3,47 @@
 	th:replace="voter/base::layout(~{::section})">
 <head>
 <meta charset="ISO-8859-1">
-<title>Admin_dashboard</title>
+<title>Voter_dashboard</title>
 </head>
 <body>
 	<section>
 		<h1 class="text-center">Welcome to Voter Pannel</h1>
 
-		<div class="container mt-5 ms-5" >
-			<div class="row">
-				<div class="col-3">
-					<div class="card" style="width: 18rem;">
-						<img src="..." th:src="@{/image/addelection.png}" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title"> Add Election</h5>
-							<p class="card-text"></p>
-							<a href="" th:href="@{/admin/addelection}" class="btn btn-primary d-grid">ADD</a>
-						</div>
+		<div class="container mt-5 ms-5">
+			<div class="card">
+				<div class="card-header">
+					<h3>On Going Elections.</h3>
+				</div>
+				<div class="card-body">
+					<div class="container">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Name</th>
+									<th scope="col">Description</th>
+									<th scope="col">Action</th>
+
+
+
+
+								</tr>
+							</thead>
+							<tbody>
+								<!-- th:unless="${obj.isAdmin}" -->
+								<tr th:each="obj,i :${elections}">
+
+									<td th:text="${i.count}" />
+									<td th:text="${obj.name}">
+									<td th:text="${obj.description}">
+									<td><a href="#" th:href="@{'/voter/get_election_candidate/'+${obj.id}}" class="btn btn-primary"> give vote</a></td>
+									<!-- <td><span th:if="${obj.startTime =='F'}">Female</span> <span
+										th:unless="${obj.gender == 'F'}">Male</span></td> -->
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
-
-				<div class="col-3">
-
-					<div class="card" style="width: 18rem;">
-						<img src="..." th:src="@{/image/groupvoter.jpg}" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">View Election</h5>
-							<p class="card-text"></p>
-							<a href="#" th:href="@{/admin/viewelection}" class="btn btn-primary d-grid">View Election</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-3">
-
-					<div class="card" style="width: 18rem;">
-						<img src="..." th:src="@{/image/removevoter.png}" class="card-img-top" alt="...">
-						<div class="card-body">
-							<h5 class="card-title">Remove Election</h5>
-							<p class="card-text"></p>
-							<a href="#" th:href="@{/admin/removeelection} " class="btn btn-primary d-grid">Remove Election</a>
-						</div>
-					</div>
-				</div>
-				
 			</div>
 		</div>
 

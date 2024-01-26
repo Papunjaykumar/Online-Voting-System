@@ -81,4 +81,12 @@ public class ElectionCandidateServiceImpl implements ElectionCandidateService {
 		return this.electRepo.findByElectionAndCandidate(election, candidate);
 	}
 
+
+	@Override
+	public List<ElectionCandidate> getCandidateOfElections(Election election) {
+		
+		List<ElectionCandidate> candiateOfElections = this.electRepo.findByElection(election);
+		return candiateOfElections;
+	}
+
 }
